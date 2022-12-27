@@ -1,0 +1,48 @@
+extends layout
+
+block content
+  h1= title
+
+
+  table(style='width:100%', border='1')
+    tr
+        th Id
+        th Name
+        th Author
+        th Rented
+
+    tr
+      th !{book.id}
+      th !{book.name}
+      th !{book.author}
+      if book.isRented
+        th V
+      else 
+        th X
+    
+  h3 Update Data 
+
+  form(style='max-width:40%; margin-inline:auto' method='post' action='')
+
+      div(style= 'margin-bottom:6px')
+        label(for='title' style='width:4.5em; display:inline-block') Title:
+        input(type="text" id='title' name='title' value=book.name)
+
+      div(style= 'margin-bottom:6px')
+        label(for='author' style='width:4.5em; display:inline-block') Auhtor:
+        input(type="text" id='author' name='author' value=book.author)
+
+      div(style= 'margin-bottom:6px')
+        label(for="rented" style='width:4.5em; display:inline-block')  Rented:
+        input(checked=book.isRented id="rented" type="checkbox" name="rented" value="true")
+        
+      button(type="submit") Update
+      
+  form(method="POST", action=`/api/books/${book.id}?_method=DELETE`)
+    button.btn.btn-success Delete
+
+      
+
+
+
+    
